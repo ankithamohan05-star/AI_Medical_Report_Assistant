@@ -3,27 +3,66 @@ import streamlit as st
 from utils.pdf_reader import extract_text_from_pdf
 from utils.gemini_helper import generate_summary
 
+from components.dashboard import show_dashboard
+from components.patient_info import show_patient_information
+from components.summary import show_summary
+from components.findings import show_findings
+from components.recommendations import show_recommendations
+from components.chat import show_chat
+from components.footer import show_footer
+
+# ---------------- Page Configuration ---------------- #
+
 st.set_page_config(
     page_title="AI Medical Report Assistant",
     page_icon="🩺",
     layout="wide"
 )
 
+# ---------------- Load CSS ---------------- #
+
+try:
+    with open("assets/style.css") as css:
+        st.markdown(
+            f"<style>{css.read()}</style>",
+            unsafe_allow_html=True
+        )
+except:
+    pass
+
 # ---------------- Sidebar ---------------- #
 
 with st.sidebar:
+
     st.title("🩺 AI Medical Report Assistant")
 
     st.markdown("---")
 
-    st.subheader("🛠 Built With")
+    st.subheader("🛠 Tech Stack")
 
     st.markdown("""
 - Python
 - Streamlit
 - Google Gemini 2.5 Flash
 - PyMuPDF
-    """)
+- Pydantic
+""")
+
+    st.markdown("---")
+
+    st.subheader("✨ Features")
+
+    st.markdown("""
+✅ AI Medical Summary
+
+✅ Health Dashboard
+
+✅ AI Chat
+
+✅ Structured Report
+
+✅ Professional UI
+""")
 
     st.markdown("---")
 
@@ -33,22 +72,24 @@ with st.sidebar:
 
     st.markdown("---")
 
-    st.caption("Version 1.0")
+    st.caption("Version 2.0")
 
 # ---------------- Main Page ---------------- #
 
 st.title("🩺 AI Medical Report Assistant")
 
 st.write(
-    "Upload your medical report PDF and let AI explain the results in simple English."
+    "Upload your medical report PDF and let AI explain it in simple English."
 )
 
 st.divider()
 
 uploaded_file = st.file_uploader(
-    "📂 Choose your Medical Report (PDF)",
+    "📂 Choose your Medical Report",
     type=["pdf"]
 )
+
+# ---------------- Process PDF ---------------- #
 
 if uploaded_file:
 
@@ -58,28 +99,31 @@ if uploaded_file:
 
     with st.spinner("🤖 Gemini is analyzing your report..."):
 
-        summary = generate_summary(extracted_text)
+        report = generate_summary(extracted_text)
 
-    st.divider()
+    if report is None:
 
-    with st.container():
+        st.error("❌ Failed to generate AI summary.")
 
-        st.subheader("🤖 AI Medical Summary")
+    else:
 
-        st.write(summary)
+        # Dashboard
+        show_dashboard(report)
 
-    st.divider()
+        # Patient Information
+        show_patient_information(report)
 
-    with st.expander("📄 View Extracted Medical Report"):
+        # Executive Summary
+        show_summary(report)
 
-        st.text_area(
-            "Extracted Text",
-            extracted_text,
-            height=400
-        )
+        # Findings
+        show_findings(report)
 
-st.divider()
+        # Recommendations
+        show_recommendations(report)
 
-st.caption(
-    "⚠️ This application provides AI-generated explanations and should not replace professional medical advice."
-)
+        # Chat
+        show_chat(extracted_text)
+
+        # Footer
+        show_footer(extracted_text)
