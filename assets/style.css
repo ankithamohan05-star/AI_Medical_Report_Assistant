@@ -1,133 +1,201 @@
-/* ===========================
-   GENERAL PAGE
-=========================== */
+/* ---------------- General ---------------- */
 
 .main {
-    padding-top: 1rem;
-    padding-bottom: 2rem;
+    background-color: #f7f9fc;
 }
 
-.block-container {
-    padding-top: 2rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+/* ---------------- Dashboard Cards ---------------- */
+
+.metric-card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+    margin-bottom: 18px;
 }
 
-/* ===========================
-   HEADINGS
-=========================== */
-
-h1 {
-    color: #0E7490;
-    font-weight: 700;
+.metric-title{
+    font-size:16px;
+    font-weight:600;
+    color:#555;
 }
 
-h2 {
-    color: #155E75;
+.metric-value{
+    font-size:34px;
+    font-weight:bold;
+    color:#0d6efd;
 }
 
-h3 {
-    color: #164E63;
+.metric-status{
+    font-size:16px;
+    color:#666;
 }
 
-/* ===========================
-   METRIC CARDS
-=========================== */
+/* ---------------- Medical Cards ---------------- */
 
-div[data-testid="metric-container"] {
-    background-color: #ffffff;
-    border: 1px solid #E5E7EB;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
+.medical-card{
+
+    background:white;
+
+    border-left:8px solid #0d6efd;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
+    transition:0.3s;
 }
 
-div[data-testid="metric-container"]:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 8px 20px rgba(0,0,0,0.15);
+.medical-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+
 }
 
-/* ===========================
-   BUTTONS
-=========================== */
+/* ---------------- Priority ---------------- */
 
-.stButton > button {
-    width: 100%;
-    border-radius: 12px;
-    height: 50px;
-    font-size: 17px;
-    font-weight: bold;
+.priority-high{
+
+    border-left-color:#dc3545;
+
 }
 
-.stButton > button:hover {
-    transform: scale(1.02);
+.priority-medium{
+
+    border-left-color:#ffc107;
+
 }
 
-/* ===========================
-   FILE UPLOADER
-=========================== */
+.priority-low{
 
-[data-testid="stFileUploader"] {
-    border-radius: 15px;
-    border: 2px dashed #0EA5E9;
-    padding: 15px;
+    border-left-color:#198754;
+
 }
 
-/* ===========================
-   TEXT INPUT
-=========================== */
+/* ---------------- Finding Labels ---------------- */
 
-.stTextInput input {
-    border-radius: 12px;
+.finding-title{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
 }
 
-/* ===========================
-   INFO / SUCCESS / WARNING
-=========================== */
+.finding-label{
 
-.stAlert {
-    border-radius: 15px;
+    color:#555;
+
+    font-weight:600;
+
 }
 
-/* ===========================
-   EXPANDERS
-=========================== */
+.finding-value{
 
-.streamlit-expanderHeader {
-    font-size: 18px;
-    font-weight: 600;
+    font-size:18px;
+
+    margin-bottom:8px;
+
 }
 
-/* ===========================
-   SIDEBAR
-=========================== */
+/* ---------------- Progress Bar ---------------- */
 
-section[data-testid="stSidebar"] {
-    background-color: #F8FAFC;
+.progress-container{
+
+    width:100%;
+
+    height:14px;
+
+    background:#e9ecef;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    margin-top:12px;
+
 }
 
-section[data-testid="stSidebar"] h1 {
-    color: #0284C7;
+.progress-fill{
+
+    height:14px;
+
+    background:#0d6efd;
+
 }
 
-section[data-testid="stSidebar"] h2 {
-    color: #0369A1;
+/* ---------------- Health Score ---------------- */
+
+.score-card{
+
+    background:#ffffff;
+
+    border-radius:14px;
+
+    padding:25px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
 }
 
-/* ===========================
-   DIVIDERS
-=========================== */
+.score{
 
-hr {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    font-size:52px;
+
+    font-weight:bold;
+
+    color:#198754;
+
 }
 
-/* ===========================
-   FOOTER
-=========================== */
+/* ---------------- Recommendation ---------------- */
 
-footer {
-    visibility: hidden;
+.recommendation-card{
+
+    background:#f8fff6;
+
+    border-left:6px solid #198754;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+}
+
+/* ---------------- Chat ---------------- */
+
+.chat-card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+/* ---------------- Footer ---------------- */
+
+.footer{
+
+    text-align:center;
+
+    color:gray;
+
+    font-size:14px;
+
 }

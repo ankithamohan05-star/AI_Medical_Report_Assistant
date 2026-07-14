@@ -42,6 +42,27 @@ class NormalFindingGroup(BaseModel):
     tests: list[str]
 
 
+# ---------------- Comparison Result ---------------- #
+
+class ComparisonResult(BaseModel):
+
+    test: str
+
+    previous_result: str
+
+    current_result: str
+
+    previous_numeric: float | None
+
+    current_numeric: float | None
+
+    unit: str
+
+    difference: float | None
+
+    trend: str
+
+
 # ---------------- Medical Report ---------------- #
 
 class MedicalReport(BaseModel):

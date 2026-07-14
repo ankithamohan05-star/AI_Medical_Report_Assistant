@@ -17,12 +17,12 @@ client = genai.Client(
 )
 
 
-# ---------------- Generate Summary ---------------- #
+# ---------------- Generate Medical Summary ---------------- #
 
 def generate_summary(report_text):
     """
-    Sends the extracted medical report to Gemini
-    and returns a structured MedicalReport object.
+    Generates a structured medical report from
+    extracted report text.
     """
 
     prompt = f"""
@@ -52,8 +52,6 @@ Medical Report
             ),
         )
 
-        # Return parsed Pydantic object
-
         if response.parsed:
 
             return response.parsed
@@ -65,3 +63,83 @@ Medical Report
         print("Gemini Error:", e)
 
         return None
+
+
+# ---------------- Comparison Summary ---------------- #
+
+def generate_comparison_summary(comparison_results):
+    """
+    Generates an AI explanation describing
+    how the patient's health has changed.
+    """
+
+    if len(comparison_results) == 0:
+
+        return (
+            "No common health markers were found "
+            "between the two reports."
+        )
+
+    comparison_text = ""
+
+    for item in comparison_results:
+
+        comparison_text += f"""
+
+Test: {item.test}
+
+Previous Result: {item.previous_result} {item.unit}
+
+Current Result: {item.current_result} {item.unit}
+
+Difference: {item.difference:+.2f} {item.unit}
+
+Trend: {item.trend}
+
+"""
+
+    prompt = f"""
+You are an experienced physician.
+
+Explain the health changes between two
+medical reports in very simple English.
+
+Rules:
+
+- Mention only the supplied tests.
+- Explain whether each marker has improved,
+  worsened or remained stable.
+- Do not invent information.
+- Keep the explanation under 200 words.
+- End with one overall health summary.
+
+Comparison Data
+
+{comparison_text}
+"""
+
+    try:
+
+        response = client.models.generate_content(
+
+            model="gemini-2.5-flash",
+
+            contents=prompt,
+
+            config=types.GenerateContentConfig(
+
+                temperature=0.2
+
+            ),
+
+        )
+
+        return response.text
+
+    except Exception as e:
+
+        print("Comparison Error:", e)
+
+        return (
+            "Unable to generate comparison summary."
+        )
